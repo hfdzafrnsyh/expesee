@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      categories.hasMany(models.todos, { as: 'todos' });
     }
   }
   categories.init({
@@ -20,10 +21,6 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'categories',
   });
-
-  categories.associate = function (models) {
-    categories.hasMany(models.todos, { as: 'todo' })
-  }
 
   return categories;
 };

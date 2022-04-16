@@ -24,10 +24,10 @@ module.exports.todos = (req, res) => {
 
 module.exports.createdTodo = async (req, res) => {
 
-    let categoryId = await Category.findOne({ where: { id: req.body.categoryId } })
+    let category = await Category.findOne({ where: { id: req.body.categoryId } })
 
 
-    if (!categoryId) {
+    if (!category) {
         res.status(404).json({
             success: false,
             message: "No Category Id"
@@ -37,7 +37,7 @@ module.exports.createdTodo = async (req, res) => {
     let Todos = {
         name: req.body.name,
         note: req.body.note,
-        categoryId: req.body.categoryId
+        categoryId: category.id
     }
 
 
@@ -61,20 +61,21 @@ module.exports.createdTodo = async (req, res) => {
 
 module.exports.updateTodo = async (req, res) => {
 
-    let categoryId = await Category.findOne({ where: { id: req.body.categoryId } });
+    let category = await Category.findOne({ where: { id: req.body.categoryId } });
 
 
-    if (!categoryId) {
+    if (!category) {
         res.status(404).json({
             success: false,
             message: "No Category Id"
         })
     }
 
+
     let Todos = {
         name: req.body.name,
         note: req.body.note,
-        categoryId: req.body.categoryId
+        categoryId: category.id
     }
 
 
